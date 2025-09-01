@@ -1,0 +1,160 @@
+# Application Configuration
+app:
+  name: "AI For Flagging Suspicious Transactions"
+  version: "0.1.0"
+  debug: false
+  environment: "development"
+
+# Database Configuration
+database:
+  provider: "supabase"
+  connection_pool_size: 10
+  timeout: 30
+  retry_attempts: 3
+
+# Machine Learning Configuration
+ml_models:
+  isolation_forest:
+    contamination: 0.1
+    n_estimators: 100
+    max_samples: 256
+    random_state: 42
+  
+  feature_engineering:
+    max_features: 1000
+    scale_features: true
+    handle_missing: "median"
+  
+  training:
+    test_size: 0.2
+    validation_size: 0.15
+    cv_folds: 5
+  
+  thresholds:
+    anomaly_score: 0.5
+    high_risk: 0.8
+    medium_risk: 0.5
+    low_risk: 0.2
+
+# Rule-based Detection
+rules:
+  high_amount:
+    threshold: 100000
+    severity: "high"
+    
+  unusual_time:
+    hours: [0, 1, 2, 3, 4, 5]
+    severity: "medium"
+    
+  rapid_succession:
+    time_window_seconds: 300
+    max_transactions: 5
+    severity: "high"
+    
+  round_amounts:
+    patterns: ["00000", "0000"]
+    severity: "low"
+
+# LLM Configuration
+llm:
+  provider: "ollama"
+  model: "llama3.1"
+  host: "http://localhost:11434"
+  timeout: 60
+  max_tokens: 2048
+  temperature: 0.7
+
+# API Configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins: ["http://localhost:3000", "http://localhost:8501"]
+  rate_limits:
+    transaction_analysis: "1000/hour"
+    model_operations: "100/hour"
+    chat_queries: "500/hour"
+
+# Streamlit Configuration
+streamlit:
+  host: "localhost"
+  port: 8501
+  theme:
+    primary_color: "#FF6B6B"
+    background_color: "#FFFFFF"
+    secondary_background_color: "#F0F2F6"
+    text_color: "#262730"
+
+# Security Configuration
+security:
+  jwt:
+    secret_key: "${SECRET_KEY}"
+    algorithm: "HS256"
+    expire_minutes: 60
+  
+  encryption:
+    key: "${ENCRYPTION_KEY}"
+    algorithm: "AES-256-GCM"
+  
+  password:
+    min_length: 8
+    require_uppercase: true
+    require_lowercase: true
+    require_numbers: true
+    require_special_chars: true
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/app.log"
+  max_size_mb: 100
+  backup_count: 5
+  console_output: true
+
+# Monitoring Configuration
+monitoring:
+  metrics:
+    enabled: true
+    port: 9090
+    path: "/metrics"
+  
+  alerts:
+    enabled: true
+    channels: ["email", "slack"]
+    thresholds:
+      error_rate: 0.05
+      response_time_ms: 1000
+      anomaly_detection_rate: 0.15
+
+# Data Processing Configuration
+data:
+  batch_size: 1000
+  max_file_size_mb: 500
+  supported_formats: ["csv", "json", "parquet"]
+  
+  storage:
+    raw_data_retention_days: 365
+    processed_data_retention_days: 180
+    model_artifacts_retention_days: 90
+  
+  validation:
+    required_fields: ["transaction_id", "amount", "timestamp", "sender_account", "receiver_account"]
+    amount_range: [0.01, 10000000]
+    future_date_tolerance_hours: 1
+
+# Performance Configuration
+performance:
+  cache:
+    enabled: true
+    ttl_seconds: 3600
+    max_size_mb: 512
+  
+  async_processing:
+    enabled: true
+    max_workers: 4
+    queue_size: 1000
+  
+  model_serving:
+    batch_prediction: true
+    batch_size: 100
+    timeout_seconds: 30

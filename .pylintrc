@@ -1,0 +1,111 @@
+[MASTER]
+# Use multiple processes to speed up Pylint
+jobs=1
+
+# Add files or directories to the blacklist
+ignore=CVS,.git,__pycache__,.venv,venv
+
+# Add files or directories matching the regex patterns to the blacklist
+ignore-patterns=.*\.pyc,.*\~
+
+[MESSAGES CONTROL]
+# Disable specific warning messages
+disable=
+    C0103,  # Invalid name (doesn't conform to naming convention)
+    C0111,  # Missing docstring
+    R0903,  # Too few public methods
+    R0913,  # Too many arguments
+    W0703,  # Catching too general exception
+    C0301,  # Line too long (handled by black)
+    R0801,  # Similar lines in files
+    W0613,  # Unused argument
+    C0200,  # Consider using enumerate
+    R0902,  # Too many instance attributes
+    R0914,  # Too many local variables
+
+[REPORTS]
+# Set the output format
+output-format=text
+
+# Include message's category in the output
+include-ids=yes
+
+# Template used to display messages
+msg-template={path}:{line}: [{msg_id}({symbol}), {obj}] {msg}
+
+[BASIC]
+# Good variable names which should always be accepted
+good-names=i,j,k,ex,Run,_,id,db,df,ax,fig
+
+# Bad variable names which should always be refused
+bad-names=foo,bar,baz,toto,tutu,tata
+
+# Regular expression matching correct constant names
+const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
+
+# Regular expression matching correct variable names
+variable-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# Regular expression matching correct function names
+function-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# Regular expression matching correct method names
+method-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# Regular expression matching correct class names
+class-rgx=[A-Z_][a-zA-Z0-9]+$
+
+# Regular expression matching correct module names
+module-rgx=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
+
+[FORMAT]
+# Maximum number of characters on a single line
+max-line-length=88
+
+# String used as indentation unit
+indent-string='    '
+
+# Number of spaces of indent required inside a hanging or continued line
+indent-after-paren=4
+
+[DESIGN]
+# Maximum number of arguments for function / method
+max-args=7
+
+# Maximum number of locals for function / method body
+max-locals=15
+
+# Maximum number of return / yield for function / method body
+max-returns=6
+
+# Maximum number of branch for function / method body
+max-branches=12
+
+# Maximum number of statements in function / method body
+max-statements=50
+
+# Maximum number of parents for a class
+max-parents=7
+
+# Maximum number of attributes for a class
+max-attributes=7
+
+# Minimum number of public methods for a class
+min-public-methods=2
+
+# Maximum number of public methods for a class
+max-public-methods=20
+
+[CLASSES]
+# List of method names used to declare (i.e. assign) instance attributes
+defining-attr-methods=__init__,__new__,setUp
+
+# List of valid names for the first argument in a class method
+valid-classmethod-first-arg=cls
+
+# List of valid names for the first argument in a metaclass class method
+valid-metaclass-classmethod-first-arg=mcs
+
+[IMPORTS]
+# Deprecated modules which should not be used
+deprecated-modules=regsub,TERMIOS,Bastion,rexec

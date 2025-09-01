@@ -1,0 +1,51 @@
+# Render Blueprint for AI For Flagging Suspicious Transactions
+# This file configures the deployment on Render's platform
+
+services:
+  # Main web service configuration
+  - type: web
+    name: anomaly-detector
+    runtime: python
+    plan: free  # Using free tier - upgrade to starter or standard for production
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    startCommand: streamlit run main_gui_enhanced.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true
+    
+    # Environment variables
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.7"
+      - key: STREAMLIT_SERVER_HEADLESS
+        value: "true"
+      - key: STREAMLIT_SERVER_PORT
+        fromService:
+          type: web
+          name: anomaly-detector
+          property: port
+      - key: STREAMLIT_SERVER_ADDRESS
+        value: "0.0.0.0"
+      - key: STREAMLIT_THEME_BASE
+        value: "dark"
+      - key: STREAMLIT_BROWSER_GATHER_USAGE_STATS
+        value: "false"
+    
+    # Health check configuration
+    healthCheckPath: /_stcore/health
+    
+    # Auto-deploy settings
+    autoDeploy: true
+    branch: main
+
+# Environment groups for shared configuration
+envVarGroups:
+  - name: app-config
+    envVars:
+      - key: APP_NAME
+        value: "AI For Flagging Suspicious Transactions"
+      - key: APP_VERSION
+        value: "1.0.0"
+      - key: ENVIRONMENT
+        value: "production"
+      - key: LOG_LEVEL
+        value: "INFO"
