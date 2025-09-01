@@ -12,7 +12,59 @@ A comprehensive AI-powered system for detecting anomalous patterns in transactio
 - **Interactive Visualizations**: Charts, graphs, and geographic mapping
 - **Export Capabilities**: Generate reports and export analysis results
 
-## 🚀 Live Demo
+## � System Workflow
+
+```mermaid
+flowchart TD
+    A[📊 Transaction Data Input] --> B{Data Source Type}
+    B -->|CSV/Excel Upload| C[📁 File Processing]
+    B -->|Manual Entry| D[✏️ Form Input]
+    B -->|API Integration| E[🔌 Real-time Data]
+    
+    C --> F[🧹 Data Validation & Cleaning]
+    D --> F
+    E --> F
+    
+    F --> G[🔍 Feature Engineering]
+    G --> H[📈 Statistical Analysis]
+    
+    H --> I{Anomaly Detection Engine}
+    I --> J[🤖 ML Algorithm Analysis]
+    I --> K[📊 Rule-based Scoring]
+    I --> L[🧠 AI Pattern Recognition]
+    
+    J --> M[🎯 Risk Score Calculation]
+    K --> M
+    L --> M
+    
+    M --> N{Risk Assessment}
+    N -->|High Risk| O[🚨 Suspicious Flag]
+    N -->|Medium Risk| P[⚠️ Review Required]
+    N -->|Low Risk| Q[✅ Normal Transaction]
+    
+    O --> R[📋 Detailed Analysis Report]
+    P --> R
+    Q --> S[📊 Summary Statistics]
+    
+    R --> T[🎨 Interactive Visualization]
+    S --> T
+    
+    T --> U[💬 AI Chat Analysis]
+    U --> V[📤 Export Results]
+    
+    V --> W[📧 Alert Notifications]
+    V --> X[📁 Report Generation]
+    V --> Y[📊 Dashboard Updates]
+    
+    style A fill:#e1f5fe
+    style O fill:#ffebee
+    style P fill:#fff3e0
+    style Q fill:#e8f5e8
+    style U fill:#f3e5f5
+    style V fill:#e0f2f1
+```
+
+## �🚀 Live Demo
 
 🌐 **Production URL**: [https://your-app-name.onrender.com](https://your-app-name.onrender.com)
 
@@ -104,6 +156,81 @@ AI-For-Flagging-Suspicious-Transactions/
 └── README.md                     # This file
 ```
 
+### 🏗️ Technical Architecture
+
+```mermaid
+graph TB
+    subgraph "Frontend Layer"
+        A[🎨 Streamlit UI]
+        B[📊 Plotly Visualizations]
+        C[💬 AI Chat Interface]
+    end
+    
+    subgraph "Application Layer"
+        D[🚀 Main GUI Enhanced]
+        E[🔧 Configuration Manager]
+        F[📁 File Upload Handler]
+    end
+    
+    subgraph "Processing Engine"
+        G[🧹 Data Preprocessor]
+        H[🔍 Feature Engineer]
+        I[🤖 ML Anomaly Detector]
+        J[📊 Statistical Analyzer]
+    end
+    
+    subgraph "AI Integration"
+        K[🧠 Ollama Chat Integration]
+        L[🎯 Risk Scoring Engine]
+        M[📈 Pattern Recognition]
+    end
+    
+    subgraph "Data Layer"
+        N[(📊 Transaction Database)]
+        O[📁 CSV/Excel Files]
+        P[🔄 Sample Data]
+    end
+    
+    subgraph "External Services"
+        Q[🌐 Ollama API]
+        R[☁️ Render Deployment]
+        S[🔐 Environment Config]
+    end
+    
+    A --> D
+    B --> D
+    C --> D
+    
+    D --> E
+    D --> F
+    
+    F --> G
+    G --> H
+    H --> I
+    H --> J
+    
+    I --> L
+    J --> L
+    K --> L
+    
+    K --> Q
+    L --> M
+    
+    G --> N
+    G --> O
+    G --> P
+    
+    D --> R
+    E --> S
+    
+    style A fill:#e3f2fd
+    style K fill:#f3e5f5
+    style I fill:#e8f5e8
+    style L fill:#fff3e0
+    style N fill:#fce4ec
+    style R fill:#e0f2f1
+```
+
 ### Development Commands
 
 ```bash
@@ -124,6 +251,57 @@ pylint src/
 # Security scan
 bandit -r src/
 safety check
+```
+
+## 🔄 CI/CD Pipeline
+
+```mermaid
+gitGraph
+    commit id: "Initial Commit"
+    branch feature
+    checkout feature
+    commit id: "Add Feature"
+    commit id: "Fix Tests"
+    checkout main
+    merge feature
+    commit id: "Deploy v1.0"
+    
+    branch hotfix
+    checkout hotfix
+    commit id: "Security Fix"
+    checkout main
+    merge hotfix
+    commit id: "Deploy v1.1"
+```
+
+```mermaid
+flowchart LR
+    A[👨‍💻 Developer Push] --> B[📡 GitHub Repository]
+    B --> C{🔍 GitHub Actions}
+    
+    C --> D[🧹 Code Quality Check]
+    C --> E[🧪 Run Tests]
+    C --> F[🔒 Security Scan]
+    
+    D --> G{All Checks Pass?}
+    E --> G
+    F --> G
+    
+    G -->|✅ Yes| H[🚀 Deploy to Render]
+    G -->|❌ No| I[📧 Notify Developer]
+    
+    H --> J[🌐 Live Application]
+    I --> K[🔧 Fix Issues]
+    K --> A
+    
+    J --> L[📊 Health Monitoring]
+    L --> M[📈 Performance Metrics]
+    
+    style A fill:#e3f2fd
+    style G fill:#fff3e0
+    style H fill:#e8f5e8
+    style I fill:#ffebee
+    style J fill:#e0f2f1
 ```
 
 ## 🌐 Deployment
@@ -319,6 +497,41 @@ ui:
 ```
 
 ## 📖 Usage
+
+### 📱 User Interaction Flow
+
+```mermaid
+sequenceDiagram
+    participant U as 👤 User
+    participant UI as 🎨 Streamlit UI
+    participant BE as ⚙️ Backend Engine
+    participant AI as 🤖 AI System
+    participant DB as 💾 Data Store
+    
+    U->>UI: Upload transaction file
+    UI->>BE: Process file data
+    BE->>DB: Store transaction data
+    
+    BE->>BE: Validate & clean data
+    BE->>BE: Feature engineering
+    
+    BE->>AI: Run anomaly detection
+    AI->>AI: ML analysis + risk scoring
+    AI->>BE: Return risk scores
+    
+    BE->>UI: Analysis results
+    UI->>U: Display visualizations
+    
+    U->>UI: Request AI insights
+    UI->>AI: Chat query
+    AI->>AI: Generate analysis
+    AI->>UI: AI response
+    UI->>U: Show insights
+    
+    U->>UI: Export results
+    UI->>BE: Generate report
+    BE->>U: Download report
+```
 
 ### File Upload
 
